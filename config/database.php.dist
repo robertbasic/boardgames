@@ -1,0 +1,16 @@
+<?php
+
+declare(strict_types=1);
+
+define('DB_CONNECTION', 'DB_CONNECTION');
+
+return [
+    'db' => [
+        'driver' => 'pdo_pgsql',
+        'dbname' => 'piggybank',
+        'user' => 'piggybank',
+        'password' => 'piggybank',
+        'host' => 'localhost',
+        'port' => 5432,
+    ]
+];
