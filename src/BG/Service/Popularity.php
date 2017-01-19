@@ -15,9 +15,11 @@ class Popularity
 
     public function calculate(int $boardgameId) : array
     {
+        $since = new \DateTime('-1 month', new \DateTimeZone('Europe/Belgrade'));
+
         $boardgame = $this->model->getBoardgame($boardgameId);
-        $averageScore = $this->model->getAverageScore($boardgameId);
-        $plays = $this->model->getPlays($boardgameId);
+        $averageScore = $this->model->getAverageScore($boardgameId, $since);
+        $plays = $this->model->getPlays($boardgameId, $since);
 
         // Some made up formula
         $popularity = round(($plays['total_plays'] * $plays['avg_players']) / ($plays['total_plays'] * $averageScore * $plays['avg_players']) * 100, 2) - 10;

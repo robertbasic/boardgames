@@ -26,8 +26,8 @@ class BoardGame
         return (float) $this->connection->fetchColumn("SELECT AVG(score) FROM reviews WHERE boardgame_id = ?", [$boardgameId]);
     }
 
-    public function getPlays(int $boardgameId) : array
+    public function getPlays(int $boardgameId, \DateTime $since) : array
     {
-        return $this->connection->fetchAssoc("SELECT COUNT(*) AS total_plays, AVG(number_of_players) AS avg_players FROM plays WHERE boardgame_id = ?", [$boardgameId]);
+        return $this->connection->fetchAssoc("SELECT COUNT(*) AS total_plays, AVG(number_of_players) AS avg_players FROM plays WHERE boardgame_id = ? AND played_at >= ?", [$boardgameId, $since->format('Y-m-d H:i:s')]);
     }
 }
