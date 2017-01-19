@@ -21,6 +21,11 @@ class BoardGame
         return $this->connection->fetchAssoc("SELECT * FROM boardgames WHERE id = ?", [$boardgameId]);
     }
 
+    public function getBoardGamesInPrint() : array
+    {
+        return $this->connection->fetchAll("SELECT * FROM boardgames WHERE in_print = 1");
+    }
+
     public function getAverageScore(int $boardgameId) : float
     {
         return (float) $this->connection->fetchColumn("SELECT AVG(score) FROM reviews WHERE boardgame_id = ?", [$boardgameId]);
